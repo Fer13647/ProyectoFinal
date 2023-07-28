@@ -1,5 +1,6 @@
 package com.ferr.tienda
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.squareup.picasso.Picasso
 
 class FormComputadoraFragment : Fragment() {
 
@@ -62,7 +64,8 @@ class FormComputadoraFragment : Fragment() {
                 editTextProcesador,
                 editTextRam,
                 editTextServiceTag,
-                editTextUbicacion);
+                editTextUbicacion,
+                editTextImagen);
 
             if(items.any{it.text.isNullOrEmpty()}){
                 return false;
@@ -91,6 +94,8 @@ class FormComputadoraFragment : Fragment() {
                     editTextNoInventario.setText(computadora.noInventario)
                     editTextUbicacion.setText(computadora.ubicacion.toString())
                     editTextModelo.setText(computadora.modelo)
+                    editTextImagen.setText(computadora.urlImagen)
+                    Picasso.get().load(computadora.urlImagen).into(imgCompu)
                 }
                 Toast.makeText(context, "Instancia recuperada", Toast.LENGTH_SHORT).show()
             }
@@ -126,6 +131,7 @@ class FormComputadoraFragment : Fragment() {
             val serviceTag = editTextServiceTag.text.toString()
             val noInventario = editTextNoInventario.text.toString()
             val ubicacion = editTextUbicacion.text.toString().toInt()
+            val urlImagen = editTextImagen.text.toString()
 
             if (idComputadora != -1) {
                 return Computadora(
@@ -139,7 +145,8 @@ class FormComputadoraFragment : Fragment() {
                     almacenamiento = almacenamiento,
                     serviceTag = serviceTag,
                     noInventario = noInventario,
-                    ubicacion = ubicacion
+                    ubicacion = ubicacion,
+                    urlImagen = urlImagen
                 );
             }
 
@@ -153,7 +160,8 @@ class FormComputadoraFragment : Fragment() {
                 almacenamiento = almacenamiento,
                 serviceTag = serviceTag,
                 noInventario = noInventario,
-                ubicacion = ubicacion
+                ubicacion = ubicacion,
+                urlImagen = urlImagen
             )
         }
     }

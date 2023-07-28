@@ -1,5 +1,6 @@
 package com.ferr.tienda
 
+import android.media.Image
 import android.text.Editable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -17,5 +18,6 @@ data class Computadora(
     val almacenamiento: Long,
     val serviceTag: String,
     val noInventario: String,
-    val ubicacion: Int
+    val ubicacion: Int,
+    val urlImagen : String
 )
